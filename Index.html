@@ -1,0 +1,204 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MONOCLONAL LAB 3D — Game Edukasi Biologi Interaktif</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- TOP HUD BAR -->
+    <header id="hud" class="hud-bar">
+      <div class="brand">
+        <span class="logo-icon">🧬</span>
+        <span class="logo-text">MONOCLONAL LAB <small>3D</small></span>
+      </div>
+      <div class="player-stats">
+        <div class="stat-box">
+          <span class="stat-label">LVL</span>
+          <span id="player-level" class="stat-val">1</span>
+        </div>
+        <div class="xp-bar-container">
+          <div class="xp-bar-fill" id="xp-fill"></div>
+          <span id="xp-text" class="xp-text">0 / 100 XP</span>
+        </div>
+      </div>
+      <div class="hud-controls">
+        <button id="btn-sound-toggle" class="icon-btn" title="Suara">🔊</button>
+        <button id="btn-enc-top" class="nav-btn-sm">Ensiklopedi</button>
+        <button id="btn-menu-top" class="nav-btn-sm">Menu</button>
+      </div>
+    </header>
+
+    <!-- MAIN VIEW CONTAINER -->
+    <main id="view-container">
+      
+      <!-- MAIN MENU -->
+      <section id="view-menu" class="view-screen active">
+        <div class="menu-hero">
+          <div class="hero-canvas-container">
+            <canvas id="menu-bg-canvas"></canvas>
+          </div>
+          <div class="menu-content">
+            <h1 class="main-title">MONOCLONAL LAB 3D</h1>
+            <p class="tagline">“Satu Target. Pengenalan Spesifik. Sains dalam Aksi.”</p>
+            
+            <div class="menu-actions">
+              <button id="btn-start-game" class="btn-primary">MULAI GAME BARU</button>
+              <button id="btn-continue-game" class="btn-secondary" disabled>LANJUTKAN</button>
+              <button id="btn-select-mission" class="btn-secondary">PILIH MISI</button>
+              <button id="btn-encyclopedia" class="btn-secondary">ENSIKLOPEDI & GLOSARIUM</button>
+              <button id="btn-team" class="btn-secondary">TIM PENYUSUN</button>
+              <button id="btn-settings" class="btn-secondary">PENGATURAN</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MISSION SELECT -->
+      <section id="view-mission-select" class="view-screen">
+        <div class="section-header">
+          <h2>PETA MISI LABORATORIUM</h2>
+          <p>Selesaikan setiap modul untuk membuka teknologi dan pengetahuan baru.</p>
+        </div>
+        <div class="mission-grid" id="mission-grid">
+          <!-- Dynamic grid populated by script.js -->
+        </div>
+        <div class="view-footer">
+          <button class="btn-back btn-secondary" data-target="view-menu">← Kembali ke Menu</button>
+        </div>
+      </section>
+
+      <!-- GAMEPLAY SCREEN -->
+      <section id="view-gameplay" class="view-screen">
+        <div class="gameplay-header">
+          <div class="mission-badge" id="hud-mission-title">Misi 1</div>
+          <div class="gameplay-tools">
+            <button id="btn-hint" class="btn-hud-tool">💡 Petunjuk</button>
+            <button id="btn-reset-mission" class="btn-hud-tool">🔄 Ulangi</button>
+          </div>
+        </div>
+
+        <div class="gameplay-body">
+          <div class="briefing-box" id="mission-objective-box">
+            <h3>Tujuan Misi</h3>
+            <p id="mission-objective-text">Memuat instruksi misi...</p>
+          </div>
+
+          <div class="interactive-stage" id="interactive-stage">
+            <!-- Dynamic interactive elements (Canvas, HTML Puzzles, Schematics) -->
+          </div>
+
+          <div class="scientific-feedback-panel" id="feedback-panel">
+            <div id="feedback-status" class="status-indicator"></div>
+            <div id="feedback-message" class="feedback-text">Pilih opsi atau lakukan interaksi untuk memulai.</div>
+          </div>
+        </div>
+
+        <div class="gameplay-footer">
+          <button class="btn-secondary" id="btn-prev-mission">← Misi Sebelumnya</button>
+          <button class="btn-back btn-secondary" data-target="view-mission-select">Daftar Misi</button>
+          <button class="btn-primary" id="btn-next-mission" disabled>Misi Selanjutnya →</button>
+        </div>
+      </section>
+
+      <!-- ENCYCLOPEDIA VIEW -->
+      <section id="view-encyclopedia" class="view-screen">
+        <div class="section-header">
+          <h2>ENSIKLOPEDI MOLEKULER & BIOTEKNOLOGI</h2>
+          <input type="text" id="enc-search" class="search-input" placeholder="Cari istilah (misal: Epitop, Hibridoma)...">
+        </div>
+        <div class="encyclopedia-layout">
+          <div class="enc-sidebar" id="enc-list">
+            <!-- Dynamic list -->
+          </div>
+          <div class="enc-detail" id="enc-detail-panel">
+            <h3>Pilih Istilah</h3>
+            <p>Klik salah satu istilah di sebelah kiri untuk mempelajari struktur dan fungsinya secara detail.</p>
+          </div>
+        </div>
+        <div class="view-footer">
+          <button class="btn-back btn-secondary" data-target="view-menu">← Kembali ke Menu</button>
+        </div>
+      </section>
+
+      <!-- TEAM VIEW -->
+      <section id="view-team" class="view-screen">
+        <div class="section-header">
+          <h2>TIM PENYUSUN — MONOCLONAL LAB TEAM</h2>
+          <p class="mission-quote">“Misi kami adalah membuat biologi antibodi monoklonal lebih mudah dipahami melalui eksplorasi sains interaktif.”</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="avatar-glow">👩‍🔬</div>
+            <h3>Metta</h3>
+            <p class="role-tag">Monoclonal Lab Team</p>
+          </div>
+          <div class="team-card">
+            <div class="avatar-glow">👨‍🔬</div>
+            <h3>Dhiro</h3>
+            <p class="role-tag">Monoclonal Lab Team</p>
+          </div>
+          <div class="team-card">
+            <div class="avatar-glow">👩‍🔬</div>
+            <h3>Felicia</h3>
+            <p class="role-tag">Monoclonal Lab Team</p>
+          </div>
+          <div class="team-card">
+            <div class="avatar-glow">👩‍🔬</div>
+            <h3>Michelle</h3>
+            <p class="role-tag">Monoclonal Lab Team</p>
+          </div>
+        </div>
+        <div class="references-block">
+          <h3>Referensi Ilmiah Terverifikasi</h3>
+          <ul class="ref-list">
+            <li><strong>Janeway's Immunobiology (9th Ed.)</strong> — Structure of Immunoglobulins & Antigen Recognition.</li>
+            <li><strong>National Center for Biotechnology Information (NCBI)</strong> — Monoclonal Antibody Production & Hybridoma Technology.</li>
+            <li><strong>World Health Organization (WHO)</strong> — Therapeutic Applications of Monoclonal Antibodies in Human Medicine.</li>
+          </ul>
+        </div>
+        <div class="view-footer">
+          <button class="btn-back btn-secondary" data-target="view-menu">← Kembali ke Menu</button>
+        </div>
+      </section>
+
+      <!-- SETTINGS MODAL/VIEW -->
+      <section id="view-settings" class="view-screen">
+        <div class="section-header">
+          <h2>PENGATURAN GAME</h2>
+        </div>
+        <div class="settings-box">
+          <div class="setting-row">
+            <span>Efek Suara & Audio Studio</span>
+            <input type="checkbox" id="setting-sound" checked>
+          </div>
+          <div class="setting-row">
+            <span>Animasi Visual & Efek Molekuler</span>
+            <input type="checkbox" id="setting-anim" checked>
+          </div>
+          <div class="setting-row">
+            <span>Mode Gerakan Disederhanakan (Reduced Motion)</span>
+            <input type="checkbox" id="setting-reduced-motion">
+          </div>
+          <hr class="divider">
+          <div class="setting-row danger-zone">
+            <div>
+              <strong>Reset Seluruh Progres Game</strong>
+              <p>Menghapus XP, level, dan misi yang telah terbuka secara permanen.</p>
+            </div>
+            <button id="btn-reset-data" class="btn-danger">RESET PROGRES</button>
+          </div>
+        </div>
+        <div class="view-footer">
+          <button class="btn-back btn-secondary" data-target="view-menu">← Kembali ke Menu</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
